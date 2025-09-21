@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "176156185142",
+    "project_id": "glucose-app-96c71",
+    "storage_bucket": "glucose-app-96c71.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:176156185142:android:51e7b66ff44dca810c7e97",
+        "android_client_info": {
+          "package_name": "com.example.glucose_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSbLP2c3pKkh1zu3UYQrrDSVoWeay822E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
