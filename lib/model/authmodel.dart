@@ -11,4 +11,14 @@ class AuthModel{
       await _auth.createUserWithEmailAndPassword(email: email, password: password);
     }
 
+    Future<void> signIn({
+      required String email,
+      required String password
+    }) async {
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+    }
+
+    Future<void> signOut() async {
+      await _auth.signOut();
+    }
 }

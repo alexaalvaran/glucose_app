@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import '../model/authmodel.dart';
-import 'package:flutter/material.dart';
 
-abstract class AuthView {
+abstract class SignUpView {
   void showLoading();
   void hideLoading();
   void showSignUpSuccess();
@@ -10,12 +9,12 @@ abstract class AuthView {
   void navigateToLogin();
 }
 
-class Authpresenter {
+class SignupPresenter {
 
-  final AuthView view;
+  final SignUpView view;
   final AuthModel model;
 
-  Authpresenter({required this.view, required this.model});
+  SignupPresenter({required this.view, required this.model});
 
   void signUp(String email, String password) async {
     view.showLoading();

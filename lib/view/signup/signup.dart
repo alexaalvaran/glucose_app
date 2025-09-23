@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../model/authmodel.dart';
-import '../../presenter/authpresenter.dart';
+import '../../presenter/signup_presenter.dart';
 import '../login/login.dart';
 
 class SignupPage extends StatefulWidget {
@@ -15,13 +15,13 @@ class SignupPage extends StatefulWidget {
   State<SignupPage> createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignupPage> implements AuthView {
-  late Authpresenter presenter;
+class _SignUpPageState extends State<SignupPage> implements SignUpView {
+  late SignupPresenter presenter;
 
   @override
   void initState() {
     super.initState();
-    presenter = Authpresenter(view: this, model: AuthModel());
+    presenter = SignupPresenter(view: this, model: AuthModel());
   }
 
   @override
@@ -158,7 +158,7 @@ class _SignUpPageState extends State<SignupPage> implements AuthView {
   void navigateToLogin() {
    Navigator.pushReplacement(
     context,
-    MaterialPageRoute(builder: (BuildContext context) => const LoginPage())
+    MaterialPageRoute(builder: (BuildContext context) => LoginPage())
    );
   }
 }
