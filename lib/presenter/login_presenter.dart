@@ -6,6 +6,7 @@ abstract class LoginView{
   void hideLoading();
   void showLoginError(String message);
   void navigateToHome();
+  void navigateToSignup();
 }
 
 class LoginPresenter {
@@ -33,5 +34,9 @@ class LoginPresenter {
       view.hideLoading();
       view.showLoginError(message);
     }
+  }
+
+  void goToSignup() {
+    view.navigateToSignup();
   }
 }

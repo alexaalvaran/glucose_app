@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../../model/authmodel.dart';
 import '../../presenter/login_presenter.dart';
 import '../home/home.dart';
+import '../signup/signup.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});
@@ -63,6 +64,7 @@ class _LoginPageState extends State<LoginPage> implements LoginView {
                   ),
                 ),
                 const SizedBox(height: 40),
+                
                 Center(
                   child: ElevatedButton(
                     onPressed: () {
@@ -85,6 +87,25 @@ class _LoginPageState extends State<LoginPage> implements LoginView {
                     ),
                     ),
                   ),
+                ),
+
+                Center(
+                  child: ElevatedButton(onPressed: (){
+                    presenter.goToSignup();
+                  }, style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                  ),
+                  child: const Text('Sign Up',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                  )),
+                ),
                 ),
               ],
             ),
@@ -122,6 +143,14 @@ class _LoginPageState extends State<LoginPage> implements LoginView {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => Home()),
+    );
+  }
+
+  @override
+  void navigateToSignup() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SignupPage()),
     );
   }
 }

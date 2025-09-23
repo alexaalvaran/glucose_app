@@ -133,7 +133,7 @@ class _SignUpPageState extends State<SignupPage> implements SignUpView {
   @override
   void showSignUpSuccess() {
     Fluttertoast.showToast(
-      msg: 'Login successful',
+      msg: 'Signup successful',
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
       backgroundColor: Colors.green,
