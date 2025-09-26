@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../../model/authmodel.dart';
 import '../../presenter/login_presenter.dart';
 import '../home/home.dart';
-import '../signup/signup.dart';
+import '../register/signup.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});
@@ -28,6 +28,17 @@ class _LoginPageState extends State<LoginPage> implements LoginView {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue,
+      appBar: AppBar(
+        title: const Text('GlucoseNet',
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.w700,
+          fontSize: 32,
+        ),
+        ),
+        backgroundColor: Colors.blue,
+        elevation: 0,
+      ),
       body: Center(
         child: Container(
           height: double.infinity,
@@ -76,7 +87,7 @@ class _LoginPageState extends State<LoginPage> implements LoginView {
                       backgroundColor: Colors.blue,
                       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
                     child: const Text('Login',
@@ -90,21 +101,16 @@ class _LoginPageState extends State<LoginPage> implements LoginView {
                 ),
 
                 Center(
-                  child: ElevatedButton(onPressed: (){
+                  child: TextButton(onPressed: (){
                     presenter.goToSignup();
-                  }, style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                  ),
+                  },
                   child: const Text('Sign Up',
                   style: TextStyle(
                     color: Colors.grey,
                     fontWeight: FontWeight.w700,
                     fontSize: 14,
                   )),
+                
                 ),
                 ),
               ],
