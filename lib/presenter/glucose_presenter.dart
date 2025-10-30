@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 import '../model/glucosemodel.dart';
 
@@ -21,20 +23,16 @@ class GlucosePresenter {
    }
   }
 
-  void getGlucoseReadings() {
+   Future<List<Map<String, dynamic>>> getGlucoseReadings() async {
     try {
-      model.getGlucoseReadings().then((snapshot) {
-        String data = snapshot.docs.map((doc) => doc['reading'].toString()).join(', ');
-        view.showGlucoseData(data);
-      });
-    } on FirebaseException catch (e) {
-      if (e.code == 'not-found'){
-        view.showError('No glucose data found.');
-      } else {
-        view.showError('An error occurred while fetching glucose data.');
-      }
+      final readings = await model.getGlucoseReadings();
+      return readings;
+    } catch (e) {
+      view.showError("Failed to fetch glucose readings: $e");
+      return [];
     }
   }
+
 
   void updateGlucoseReading(String id, double newReading) {
     try {
@@ -51,4 +49,5 @@ class GlucosePresenter {
       view.showError('Failed to delete glucose reading');
     }
   }
+
 }

@@ -6,7 +6,7 @@ import '../home/home.dart';
 import 'glucoseform.dart';
 
 class GlucosePage extends StatefulWidget {
-  GlucosePage({super.key});
+  const GlucosePage({super.key});
 
   @override
   State<GlucosePage> createState() => _GlucosePageState();
@@ -15,52 +15,80 @@ class GlucosePage extends StatefulWidget {
 class _GlucosePageState extends State<GlucosePage> implements GlucoseView {
   late GlucosePresenter presenter;
   int currentPageIndex = 0;
+  List<Map<String, dynamic>> _readings = [];
+  bool _loading = false;
+  String? _error;
+
   @override
   void initState() {
     super.initState();
     presenter = GlucosePresenter(view: this, model: GlucoseModel());
+    loadReadings();
   }
+
+  Future<void> loadReadings() async {
+  setState(() => _loading = true);
+  try {
+    final data = await presenter.getGlucoseReadings();
+    setState(() {
+      _readings = data;
+      _loading = false;
+    });
+  } catch (e) {
+    setState(() {
+      _error = e.toString();
+      _loading = false;
+    });
+  }
+}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Glucose Readings'),
+        automaticallyImplyLeading: false,
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-           showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                shape: RoundedRectangleBorder(
-                   borderRadius: BorderRadius.circular(15),
-                   ),
-                backgroundColor: Colors.white,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text("Add Glucose Reading"),
-            IconButton(
-              icon: const Icon(Icons.close),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        ),
-        content: SizedBox(
-          height: 250,
-          width: double.maxFinite,
-          child: GlucoseForm(), 
-        ),
-      );
-    },
-  );
-          },
-          child: const Text('+ Add Glucose Reading'),
-          ),
+      body: _loading
+          ? const Center(child: CircularProgressIndicator())
+          : _error != null
+              ? Center(child: Text(_error!))
+              : _readings.isEmpty
+                  ? const Center(child: Text('No glucose readings found'))
+                  : RefreshIndicator(
+                      onRefresh: loadReadings,
+                      child: ListView.builder(
+                        itemCount: _readings.length,
+                        itemBuilder: (context, index) {
+                          final reading = _readings[index]['reading'];
+                          final id = _readings[index]['id'];
+               
+                          return Card(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 6),
+                            child: ListTile(
+                              
+                              title: Text('$reading mmol/L',
+                                  style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold)),
+                              trailing: IconButton(onPressed: (){
+                                presenter.deleteGlucoseReading(id);
+                                loadReadings();
+                              }, icon: Icon(Icons.delete)),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => GlucoseForm()),
+            );
+        },
+        child: const Icon(Icons.add),
       ),
 
       bottomNavigationBar: BottomNavigationBar(
@@ -86,9 +114,6 @@ class _GlucosePageState extends State<GlucosePage> implements GlucoseView {
           ),
         ],
       ),
-
-
-
     );
   }
 
@@ -101,4 +126,5 @@ class _GlucosePageState extends State<GlucosePage> implements GlucoseView {
   void showError(String message) {
     Fluttertoast.showToast(msg: message, backgroundColor: Colors.red);
   }
+
 }

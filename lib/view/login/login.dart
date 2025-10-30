@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> implements LoginView {
           margin: const EdgeInsets.only(top: 100),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(50.0),
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0)),
           ),
           child: SingleChildScrollView(
           child: Padding(

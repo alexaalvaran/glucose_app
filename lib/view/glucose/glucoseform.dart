@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../model/glucosemodel.dart';
 import '../../presenter/glucose_presenter.dart';
+import '../glucose/glucose.dart';
 
 class GlucoseForm extends StatefulWidget {
   const GlucoseForm({super.key});
@@ -59,6 +60,9 @@ class _GlucoseFormState extends State<GlucoseForm> implements GlucoseView {
                       String  glucose = glucoseController.text.trim();
                       if (glucose.isNotEmpty) {
                         presenter.addGlucoseReading(double.parse(glucose));
+                                  Navigator.push(
+                                     context,
+                                     MaterialPageRoute(builder: (context) => GlucosePage()),);
                       } else {
                         showError("Please enter a valid glucose reading.");
                       }
