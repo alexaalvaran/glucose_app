@@ -73,8 +73,19 @@ class _GlucosePageState extends State<GlucosePage> implements GlucoseView {
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold)),
                               trailing: IconButton(onPressed: (){
-                                presenter.deleteGlucoseReading(id);
-                                loadReadings();
+                               ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Are you sure you want to delete $reading?'),
+                                  duration: Duration(seconds: 5),
+                                  action: SnackBarAction( // Optional: add an action button
+                                  label: 'Yes',
+                                   onPressed: () {
+                                     presenter.deleteGlucoseReading(id);
+                                    loadReadings();
+                                   },
+                                   ),
+                                    ),
+                                    );
                               }, icon: Icon(Icons.delete)),
                             ),
                           );
