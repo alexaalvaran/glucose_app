@@ -35,13 +35,14 @@ class _GlucoseFormState extends State<GlucoseForm> implements GlucoseView {
 
           child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(left: 5, right:5),
+            padding: const EdgeInsets.only(left: 5, right:5, top:20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 50),
                 const SizedBox(height: 20),
                 const Text('Blood Glucose'),
+                const Padding(padding: EdgeInsets.all(10)),
                 TextField(
                   controller: glucoseController,
                   decoration: const InputDecoration(
@@ -51,7 +52,7 @@ class _GlucoseFormState extends State<GlucoseForm> implements GlucoseView {
                     ),
                   ),
                 ),
-                const Padding(padding: EdgeInsets.only(top: 40)),
+                const Padding(padding: EdgeInsets.only(top: 30)),
 
                 SizedBox(
                   width:  double.infinity,
