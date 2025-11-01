@@ -16,7 +16,7 @@ class SignupPresenter {
 
   SignupPresenter({required this.view, required this.model});
 
-  void signUp(String email, String password) async {
+  Future<void> signUp(String email, String password) async {
     view.showLoading();
     try {
       await model.signUp(email: email, password: password);

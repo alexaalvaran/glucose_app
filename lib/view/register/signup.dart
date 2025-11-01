@@ -46,7 +46,7 @@ class _SignUpPageState extends State<SignupPage> implements SignUpView {
           margin: const EdgeInsets.only(top: 100),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(50.0),
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0)),
           ),
           child: SingleChildScrollView(
           child: Padding(
